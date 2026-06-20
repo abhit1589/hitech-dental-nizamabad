@@ -384,9 +384,16 @@ a:hover { color: var(--red); }
 .doctor-profile-layout {
   display: grid;
   grid-template-columns: 320px 1fr;
-  gap: 48px;
+  grid-template-areas:
+    "photo content"
+    "sidebar content";
+  gap: 24px 48px;
   align-items: start;
 }
+
+.doctor-profile-photo { grid-area: photo; }
+
+.doctor-profile-content { grid-area: content; }
 
 .doctor-profile-photo {
   border-radius: var(--radius-lg);
@@ -415,10 +422,10 @@ a:hover { color: var(--red); }
 }
 
 .doctor-profile-sidebar {
+  grid-area: sidebar;
   background: var(--cream);
   border-radius: var(--radius-lg);
   padding: 24px;
-  margin-top: 24px;
 }
 
 .doctor-profile-sidebar h4 {
@@ -483,8 +490,82 @@ a:hover { color: var(--red); }
 }
 
 @media (max-width: 900px) {
-  .doctor-profile-layout { grid-template-columns: 1fr; }
+  .doctor-profile-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "photo"
+      "content"
+      "sidebar";
+    gap: 28px;
+  }
+
   .doctor-profile-photo img { aspect-ratio: 16 / 10; }
+
+  /* Krishna Teja — large hero photo, compact expertise footer */
+  .doctor-profile-layout--photo .doctor-profile-photo {
+    min-height: 0;
+    width: 100%;
+  }
+
+  .doctor-profile-layout--photo .doctor-profile-photo img {
+    aspect-ratio: auto;
+    width: 100%;
+    height: min(520px, 72vh);
+    min-height: 400px;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .doctor-profile-layout--photo .doctor-profile-sidebar {
+    background: transparent;
+    padding: 16px 0 0;
+    border-top: 1px solid #e8e8f0;
+    margin-top: 4px;
+  }
+
+  .doctor-profile-layout--photo .doctor-profile-sidebar h4 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray);
+    margin-bottom: 12px;
+  }
+
+  .doctor-profile-layout--photo .doctor-expertise {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 0;
+  }
+
+  .doctor-profile-layout--photo .doctor-expertise .area-service-tag {
+    font-size: 0.62rem;
+    font-weight: 500;
+    padding: 5px 4px;
+    line-height: 1.25;
+    text-align: center;
+    border-radius: 6px;
+    background: var(--light-gray);
+  }
+}
+
+@media (max-width: 480px) {
+  .doctor-profile-layout--photo .doctor-profile-photo img {
+    min-height: 360px;
+    height: min(480px, 68vh);
+  }
+
+  .doctor-profile-layout--photo .doctor-expertise {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+
+  .doctor-profile-layout--photo .doctor-expertise .area-service-tag {
+    font-size: 0.6rem;
+    padding: 4px 4px;
+  }
 }
 
 /* ── About Split ── */
