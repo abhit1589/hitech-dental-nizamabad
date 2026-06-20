@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = '918462224453';
+const WHATSAPP_NUMBER = '918462318437';
 const WHATSAPP_MESSAGE = 'Hello, I would like to book an appointment at Hi-tech Dental Hospital.';
 
 function initWhatsAppWidget() {
