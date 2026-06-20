@@ -524,30 +524,31 @@ a:hover { color: var(--red); }
   }
 
   .doctor-profile-layout--photo .doctor-profile-sidebar h4 {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     font-weight: 700;
     text-align: center;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--gray);
-    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+    color: var(--purple);
+    margin-bottom: 14px;
   }
 
   .doctor-profile-layout--photo .doctor-expertise {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
     margin-top: 0;
   }
 
   .doctor-profile-layout--photo .doctor-expertise .area-service-tag {
-    font-size: 0.62rem;
-    font-weight: 500;
-    padding: 5px 4px;
-    line-height: 1.25;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px 10px;
+    line-height: 1.35;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 8px;
     background: var(--light-gray);
+    color: var(--purple);
   }
 }
 
@@ -558,13 +559,12 @@ a:hover { color: var(--red); }
   }
 
   .doctor-profile-layout--photo .doctor-expertise {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
+    gap: 7px;
   }
 
   .doctor-profile-layout--photo .doctor-expertise .area-service-tag {
-    font-size: 0.6rem;
-    padding: 4px 4px;
+    font-size: 0.75rem;
+    padding: 7px 8px;
   }
 }
 
