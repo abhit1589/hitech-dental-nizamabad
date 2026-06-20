@@ -364,6 +364,129 @@ a:hover { color: var(--red); }
   margin-top: 4px;
 }
 
+.doctor-card-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--purple);
+}
+
+.doctor-card-link:hover { color: var(--red); }
+
+.doctor-card h3 a {
+  color: inherit;
+}
+
+.doctor-card h3 a:hover { color: var(--red); }
+
+/* ── Doctor Profile Page ── */
+.doctor-profile-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.doctor-profile-photo {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: var(--light-gray);
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doctor-profile-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.doctor-profile-photo .doctor-icon {
+  width: 120px;
+  height: 120px;
+  font-size: 3rem;
+  margin: 48px auto;
+}
+
+.doctor-profile-sidebar {
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-top: 24px;
+}
+
+.doctor-profile-sidebar h4 {
+  color: var(--purple);
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.doctor-profile-content h2 {
+  color: var(--purple);
+  font-size: 1.35rem;
+  margin: 32px 0 16px;
+}
+
+.doctor-profile-content h2:first-child { margin-top: 0; }
+
+.doctor-profile-content p {
+  color: var(--gray);
+  margin-bottom: 16px;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.doctor-expertise {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.doctor-team-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.doctor-team-nav a {
+  display: block;
+  padding: 20px 24px;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--green);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.doctor-team-nav a:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  color: var(--purple);
+}
+
+.doctor-team-nav strong {
+  display: block;
+  color: var(--purple);
+  margin-bottom: 4px;
+}
+
+.doctor-team-nav span {
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+@media (max-width: 900px) {
+  .doctor-profile-layout { grid-template-columns: 1fr; }
+  .doctor-profile-photo img { aspect-ratio: 16 / 10; }
+}
+
 /* ── About Split ── */
 .about-split {
   display: grid;
