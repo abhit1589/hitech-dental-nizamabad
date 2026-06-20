@@ -399,6 +399,9 @@ a:hover { color: var(--red); }
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
+}
+
+.doctor-profile-photo:not(:has(img)) {
   background: var(--light-gray);
   min-height: 280px;
   display: flex;
@@ -406,9 +409,15 @@ a:hover { color: var(--red); }
   justify-content: center;
 }
 
+.doctor-profile-photo:has(img) {
+  display: block;
+  line-height: 0;
+  background: transparent;
+}
+
 .doctor-profile-photo img {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 693 / 1024;
   object-fit: cover;
   object-position: top center;
   display: block;
@@ -502,16 +511,18 @@ a:hover { color: var(--red); }
   .doctor-profile-photo img { aspect-ratio: 16 / 10; }
 
   /* Krishna Teja — large hero photo, compact expertise footer */
-  .doctor-profile-layout--photo .doctor-profile-photo {
-    min-height: 0;
+  .doctor-profile-layout--photo .doctor-profile-photo:has(img) {
     width: 100%;
+    max-height: min(72vh, 560px);
+    aspect-ratio: 693 / 1024;
   }
 
   .doctor-profile-layout--photo .doctor-profile-photo img {
-    aspect-ratio: auto;
     width: 100%;
-    height: min(520px, 72vh);
-    min-height: 400px;
+    height: 100%;
+    aspect-ratio: unset;
+    max-height: none;
+    min-height: 0;
     object-fit: cover;
     object-position: top center;
   }
@@ -553,9 +564,8 @@ a:hover { color: var(--red); }
 }
 
 @media (max-width: 480px) {
-  .doctor-profile-layout--photo .doctor-profile-photo img {
-    min-height: 360px;
-    height: min(480px, 68vh);
+  .doctor-profile-layout--photo .doctor-profile-photo:has(img) {
+    max-height: min(68vh, 480px);
   }
 
   .doctor-profile-layout--photo .doctor-expertise {
