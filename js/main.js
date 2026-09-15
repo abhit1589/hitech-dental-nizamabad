@@ -318,42 +318,39 @@ function animateCounter(element, start, end, duration) {
 function initStickyCTA() {
   if (window.innerWidth > 768) return; // Desktop only shows regular nav CTA
 
+  // Determine correct path to contact.html based on current location
+  const path = window.location.pathname;
+  const isInSubfolder = path.includes('/services/') || path.includes('/areas/') || path.includes('/doctors/');
+  const contactHref = isInSubfolder ? '../contact.html' : 'contact.html';
+
   const stickyCTA = document.createElement('div');
   stickyCTA.className = 'sticky-mobile-cta';
   stickyCTA.innerHTML = `
-    <a href="contact.html" class="btn btn-primary">📅 Book Appointment</a>
-  `;
-  stickyCTA.style.cssText = `
-    position: fixed;
-    bottom: 80px;
-    left: 16px;
-    right: 16px;
-    z-index: 900;
-    padding: 12px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(102, 45, 145, 0.2);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.3s, transform 0.3s;
-    pointer-events: none;
+    <a href="${contactHref}" class="btn btn-primary">📅 Book Appointment</a>
   `;
 
   document.body.appendChild(stickyCTA);
 
+  // Get WhatsApp button to adjust its position
+  const whatsappFloat = document.querySelector('.whatsapp-float');
+
   // Show when scrolled past hero
-  let hasShown = false;
+  let isVisible = false;
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 400 && !hasShown) {
-      stickyCTA.style.opacity = '1';
-      stickyCTA.style.transform = 'translateY(0)';
-      stickyCTA.style.pointerEvents = 'auto';
-      hasShown = true;
-    } else if (window.scrollY <= 400 && hasShown) {
-      stickyCTA.style.opacity = '0';
-      stickyCTA.style.transform = 'translateY(20px)';
-      stickyCTA.style.pointerEvents = 'none';
-      hasShown = false;
+    const shouldShow = window.scrollY > 400;
+    
+    if (shouldShow && !isVisible) {
+      stickyCTA.classList.add('visible');
+      if (whatsappFloat) {
+        whatsappFloat.style.bottom = '80px';
+      }
+      isVisible = true;
+    } else if (!shouldShow && isVisible) {
+      stickyCTA.classList.remove('visible');
+      if (whatsappFloat) {
+        whatsappFloat.style.bottom = window.innerWidth <= 768 ? '20px' : '24px';
+      }
+      isVisible = false;
     }
   });
 }
