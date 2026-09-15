@@ -235,13 +235,24 @@ function initScrollAnimations() {
     });
   }, observerOptions);
 
-  // Observe sections for fade-in effect
-  document.querySelectorAll('.section, .service-card, .testimonial-card, .doctor-card, .feature-item, .benefit-item').forEach(el => {
+  // Observe only smaller elements for fade-in effect (NOT large content containers like .section)
+  const animatedElements = document.querySelectorAll('.service-card, .testimonial-card, .doctor-card, .feature-item, .benefit-item');
+  
+  animatedElements.forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
   });
+
+  // Failsafe: force visibility after 500ms to prevent blank pages if observer doesn't fire
+  setTimeout(() => {
+    animatedElements.forEach(el => {
+      if (!el.classList.contains('animate-in')) {
+        el.classList.add('animate-in');
+      }
+    });
+  }, 500);
 
   // Add animation class styles dynamically
   const style = document.createElement('style');
