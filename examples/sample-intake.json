@@ -1,16 +1,4 @@
-/**
- * Hi-tech Dental Hospital - Clinic Configuration
- * 
- * This file contains all clinic-specific data. To rebrand for a new clinic:
- * 1. Update all values in this config
- * 2. Replace images in assets/images/ (keep filenames or update image paths here)
- * 3. Update domain in canonical URLs throughout HTML
- * 4. Deploy to your hosting
- * 
- * See TEMPLATE.md for complete rebranding instructions.
- */
-
-const CLINIC_CONFIG = {
+{
   "name": "Hi-tech Dental Hospital",
   "shortName": "Hitech Dental Clinic",
   "tagline": "Expert Dental Care in Nizamabad",
@@ -42,21 +30,13 @@ const CLINIC_CONFIG = {
     "sunday": "10:30 AM – 1:00 PM",
     "displayShort": "Mon–Sat: 10 AM–9 PM • Sun: 10:30 AM–1 PM"
   },
-  "brand": {
+  "domain": "hitechdentalnizamabad.com",
+  "googleMapsUrl": "https://www.google.com/maps/place/Hi-tech+dental+hospital/@18.6741521,78.1027688,17z",
+  "logoPath": "logo.png",
+  "brandColors": {
     "primaryColor": "#662D91",
     "secondaryColor": "#E31E24",
-    "accentColor": "#00A651",
-    "logo": "assets/logo.png",
-    "favicon": "assets/favicon.png"
-  },
-  "social": {
-    "facebook": "#",
-    "instagram": "#",
-    "whatsappCTA": "https://wa.me/918462318437?text=Hello,%20I%20would%20like%20to%20book%20an%20appointment%20at%20Hi-tech%20Dental%20Hospital."
-  },
-  "website": {
-    "url": "https://hitechdentalnizamabad.com",
-    "domain": "hitechdentalnizamabad.com"
+    "accentColor": "#00A651"
   },
   "doctors": [
     {
@@ -66,12 +46,7 @@ const CLINIC_CONFIG = {
       "specialty": "Endodontist (Root Canal Specialist)",
       "bio": "Gold Medallist • First M.D.S in Nizamabad District",
       "image": null,
-      "profileUrl": "doctors/dr-nanda-kumar.html",
-      "specialties": [
-        "Root Canal Treatment",
-        "Cosmetic Restorations",
-        "Endodontics"
-      ]
+      "specialties": ["Root Canal Treatment", "Cosmetic Restorations", "Endodontics"]
     },
     {
       "id": "krishna-teja",
@@ -79,13 +54,8 @@ const CLINIC_CONFIG = {
       "degree": "Oral & Maxillofacial Surgeon | Implantologist",
       "specialty": "Oral Surgeon & Implantologist",
       "bio": "Switzerland-trained in advanced implantology",
-      "image": "assets/images/dr-krishna-teja.jpg",
-      "profileUrl": "doctors/dr-krishna-teja.html",
-      "specialties": [
-        "Dental Implants",
-        "Oral Surgery",
-        "Wisdom Teeth Removal"
-      ]
+      "image": "dr-krishna-teja.jpg",
+      "specialties": ["Dental Implants", "Oral Surgery", "Wisdom Teeth Removal"]
     },
     {
       "id": "naga-swetha",
@@ -94,12 +64,7 @@ const CLINIC_CONFIG = {
       "specialty": "Pediatric Dentist (Children's Dentist)",
       "bio": "Gentle dental care for children and teens",
       "image": null,
-      "profileUrl": "doctors/dr-naga-swetha.html",
-      "specialties": [
-        "Children's Dentistry",
-        "Preventive Care",
-        "Fluoride Treatment"
-      ]
+      "specialties": ["Children's Dentistry", "Preventive Care", "Fluoride Treatment"]
     }
   ],
   "services": [
@@ -108,78 +73,66 @@ const CLINIC_CONFIG = {
       "title": "Teeth Cleaning & Scaling",
       "shortDesc": "Professional cleaning to remove plaque, tartar and stains for a brighter, healthier smile.",
       "icon": "🦷",
-      "image": "assets/images/teeth-cleaning.jpg",
-      "detailPage": "services/teeth-cleaning.html"
+      "image": "teeth-cleaning.jpg"
     },
     {
       "slug": "root-canal",
       "title": "Root Canal Treatment",
       "shortDesc": "Pain-free root canal therapy to save infected teeth and restore full function.",
       "icon": "🔧",
-      "image": "assets/images/root-canal.jpg",
-      "detailPage": "services/root-canal.html"
+      "image": "root-canal.jpg"
     },
     {
       "slug": "dental-implants",
       "title": "Dental Implants",
       "shortDesc": "Permanent tooth replacement solutions that look and feel like natural teeth.",
       "icon": "⚙️",
-      "image": "assets/images/implants.jpg",
-      "detailPage": "services/dental-implants.html"
+      "image": "implants.jpg"
     },
     {
       "slug": "braces-orthodontics",
       "title": "Braces & Orthodontics",
       "shortDesc": "Metal, ceramic and clear aligners to straighten teeth and correct bite issues.",
       "icon": "📐",
-      "image": "assets/images/braces.jpg",
-      "detailPage": "services/braces-orthodontics.html"
+      "image": "braces.jpg"
     },
     {
       "slug": "teeth-whitening",
       "title": "Teeth Whitening",
       "shortDesc": "Safe, effective whitening treatments for a noticeably brighter smile in one visit.",
       "icon": "✨",
-      "image": "assets/images/whitening.jpg",
-      "detailPage": "services/teeth-whitening.html"
+      "image": "whitening.jpg"
     },
     {
       "slug": "crowns-bridges",
       "title": "Crowns & Bridges",
       "shortDesc": "Porcelain, zirconia and metal-ceramic crowns and bridges to restore damaged teeth.",
       "icon": "👑",
-      "image": "assets/images/crowns.jpg",
-      "detailPage": "services/crowns-bridges.html"
+      "image": "crowns.jpg"
     },
     {
       "slug": "pediatric-dentistry",
       "title": "Pediatric Dentistry",
       "shortDesc": "Child-friendly dental care including fluoride treatment, sealants, and habit counseling.",
       "icon": "👶",
-      "image": "assets/images/pediatric.jpg",
-      "detailPage": "services/pediatric-dentistry.html"
+      "image": "pediatric.jpg"
     },
     {
       "slug": "tooth-extraction",
       "title": "Tooth Extraction & Surgery",
       "shortDesc": "Simple and surgical extractions including wisdom teeth removal with minimal discomfort.",
       "icon": "💉",
-      "image": "assets/images/extraction.jpg",
-      "detailPage": "services/tooth-extraction.html"
+      "image": "extraction.jpg"
     },
     {
       "slug": "gum-treatment",
       "title": "Gum Treatment",
       "shortDesc": "Treatment for gingivitis and periodontitis including deep cleaning and maintenance.",
       "icon": "🌿",
-      "image": "assets/images/gum-treatment.jpg",
-      "detailPage": "services/gum-treatment.html"
+      "image": "gum-treatment.jpg"
     }
   ],
   "googleReviews": {
-    "rating": 5,
-    "totalReviews": 12,
-    "googleMapsUrl": "https://www.google.com/maps/place/Hi-tech+dental+hospital/@18.6741521,78.1027688,17z",
     "reviews": [
       {
         "text": "I had a great experience at this dental hospital. The doctors were professional, patient, and explained the treatment clearly before starting. The staff was friendly and supportive, and the entire process was smooth and well organized. The clinic was clean, hygienic, and maintained high standards of care.",
@@ -250,108 +203,24 @@ const CLINIC_CONFIG = {
     "services": 20
   },
   "areas": [
-    {
-      "name": "Bodhan",
-      "distance": "35 km",
-      "slug": "bodhan"
-    },
-    {
-      "name": "Armoor",
-      "distance": "25 km",
-      "slug": "armoor"
-    },
-    {
-      "name": "Basar",
-      "distance": "35 km",
-      "slug": "basar"
-    },
-    {
-      "name": "Bheemgal",
-      "distance": "30 km",
-      "slug": "bheemgal"
-    },
-    {
-      "name": "Dichpally",
-      "distance": "28 km",
-      "slug": "dichpally"
-    },
-    {
-      "name": "Varni",
-      "distance": "45 km",
-      "slug": "varni"
-    },
-    {
-      "name": "Mortad",
-      "distance": "20 km",
-      "slug": "mortad"
-    },
-    {
-      "name": "Jakaram",
-      "distance": "32 km",
-      "slug": "jakaram"
-    },
-    {
-      "name": "Dharpally",
-      "distance": "38 km",
-      "slug": "dharpally"
-    },
-    {
-      "name": "Navipet",
-      "distance": "30 km",
-      "slug": "navipet"
-    },
-    {
-      "name": "Kammarpally",
-      "distance": "25 km",
-      "slug": "kammarpally"
-    },
-    {
-      "name": "Nandipet",
-      "distance": "28 km",
-      "slug": "nandipet"
-    },
-    {
-      "name": "Yellareddy",
-      "distance": "40 km",
-      "slug": "yellareddy"
-    },
-    {
-      "name": "Machareddy",
-      "distance": "33 km",
-      "slug": "machareddy"
-    },
-    {
-      "name": "Mupkal",
-      "distance": "27 km",
-      "slug": "mupkal"
-    }
+    { "name": "Bodhan", "distance": "35 km", "slug": "bodhan" },
+    { "name": "Armoor", "distance": "25 km", "slug": "armoor" },
+    { "name": "Basar", "distance": "35 km", "slug": "basar" },
+    { "name": "Bheemgal", "distance": "30 km", "slug": "bheemgal" },
+    { "name": "Dichpally", "distance": "28 km", "slug": "dichpally" },
+    { "name": "Varni", "distance": "45 km", "slug": "varni" },
+    { "name": "Mortad", "distance": "20 km", "slug": "mortad" },
+    { "name": "Jakaram", "distance": "32 km", "slug": "jakaram" },
+    { "name": "Dharpally", "distance": "38 km", "slug": "dharpally" },
+    { "name": "Navipet", "distance": "30 km", "slug": "navipet" },
+    { "name": "Kammarpally", "distance": "25 km", "slug": "kammarpally" },
+    { "name": "Nandipet", "distance": "28 km", "slug": "nandipet" },
+    { "name": "Yellareddy", "distance": "40 km", "slug": "yellareddy" },
+    { "name": "Machareddy", "distance": "33 km", "slug": "machareddy" },
+    { "name": "Mupkal", "distance": "27 km", "slug": "mupkal" }
   ],
-  "heroImages": [
-    {
-      "url": "assets/images/hero-clinic.jpg",
-      "alt": "Hitech Dental Clinic interior",
-      "caption": "Modern dental care in the heart of Nizamabad"
-    },
-    {
-      "url": "assets/images/about-clinic.jpg",
-      "alt": "Dental clinic reception area",
-      "caption": "Comfortable, welcoming environment for all patients"
-    },
-    {
-      "url": "assets/images/about-dentist.jpg",
-      "alt": "Experienced dental team",
-      "caption": "Expert specialists dedicated to your smile"
-    }
-  ],
-  "cta": {
-    "primary": "Book Appointment",
-    "whatsapp": "WhatsApp Us",
-    "call": "Call Now",
-    "defaultWhatsAppMessage": "Hello, I would like to book an appointment at Hi-tech Dental Hospital."
+  "social": {
+    "facebook": "#",
+    "instagram": "#"
   }
-};
-
-// Export for use in other scripts
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = CLINIC_CONFIG;
 }

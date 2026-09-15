@@ -2,15 +2,45 @@
 
 This repository is a complete, production-ready website template for dental clinics. The **Hi-tech Dental Hospital** instance serves as the flagship demo.
 
+---
+
+## 🚀 **NEW: Automated Build Pipeline**
+
+**For Launch Path Studio operators**, use the **automated pipeline** for 10-15 minute site generation:
+
+📖 **Read:** [PIPELINE.md](PIPELINE.md) — Complete operator runbook  
+🔧 **Tool:** `scripts/generate-from-intake.mjs` — Site generator script  
+📋 **Schema:** `intake.schema.json` — Intake data specification  
+📝 **Example:** `examples/sample-intake.json` — HiTech Dental intake template
+
+**Quick start:**
+```bash
+# 1. Fill intake JSON (copy sample)
+cp examples/sample-intake.json intake/new-clinic.json
+# Edit with clinic data
+
+# 2. Generate site
+node scripts/generate-from-intake.mjs intake/new-clinic.json
+
+# 3. Deploy to client server + custom domain
+# See PIPELINE.md for complete deployment steps
+```
+
+**This automated workflow replaces manual config editing for production use.**
+
+---
+
 ## 💡 Product Philosophy: Cheap, Near-Automatic Sites
 
 **This is a repeatable, low-touch product.** Each new clinic site follows the same streamlined workflow:
 
-### The 3-Step Process
+### The 3-Step Process (Legacy Manual Method)
 1. **LPS Intake** → Collect clinic details (name, address, phone, doctors, services)
-2. **Fill `clinic-config.js`** → Update configuration file with clinic info
+2. **Fill `clinic-config.js`** → Update configuration file with clinic info (OR use generator script above)
 3. **Attach Google 5★ reviews** → Copy real reviews from Google Maps URL (auto-scrolling carousel included)
-4. **Deploy** → Push to Vercel/hosting, done
+4. **Deploy** → Push to client server + custom domain, done
+
+**⚡ NEW: For faster builds, skip manual editing and use the generator script. See [PIPELINE.md](PIPELINE.md).**
 
 ### What Operators Should NOT Do
 ❌ **Hand-write testimonials** - Always use real Google reviews  
