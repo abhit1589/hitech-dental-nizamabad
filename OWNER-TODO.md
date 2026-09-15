@@ -1,46 +1,85 @@
 # Owner TODO List
 
-This file lists items that the clinic owner should update to personalize and complete the website.
+This file lists items that the clinic owner should update to personalize the Hi-tech Dental website. The site is **production-ready** and can be deployed immediately. These items enhance branding and replace demo content with real clinic materials.
 
-## High Priority
+**Note:** This site also serves as a **reusable template** for other dental clinics. See `TEMPLATE.md` for instructions on launching additional clinic websites using this codebase.
 
-### 1. Replace Placeholder Images
-**Status:** 🟡 Using stock/generic images
+---
 
-The website currently uses Wikimedia Commons dental stock photos. Replace these with actual photos of your clinic:
+## High Priority (Pre-Launch)
 
-- `assets/images/hero-clinic.jpg` — Main hero image (clinic exterior or interior)
-- `assets/images/about-clinic.jpg` — Clinic interior/reception
-- `assets/images/about-dentist.jpg` — Team photo or clinic environment
-- All service images (if you have clinic-specific photos)
+### 1. Update Centralized Configuration
+**Status:** 🔴 REQUIRED FOR ACCURACY
 
-### 2. Add Social Media Links
-**Status:** 🟡 Placeholders in place
+**File:** `js/clinic-config.js`
 
-Update footer social media links in ALL pages (or remove if not using):
+The website uses a centralized config file. Update these values to ensure accurate clinic information everywhere:
 
-- **Facebook:** Currently `href="#"` — add your page URL
-- **Instagram:** Currently `href="#"` — add your profile URL  
-- **WhatsApp:** Already linked to clinic phone number ✅
+```javascript
+// Verify and update if needed:
+- name: "Hi-tech Dental Hospital"
+- contact.phone, phoneLink, whatsapp
+- contact.email
+- contact.address (all fields)
+- hours (weekdays, saturday, sunday)
+- social.facebook (add real URL or leave "#")
+- social.instagram (add real URL or leave "#")
+- doctors array (verify credentials)
+- testimonials (replace with real patient reviews)
+- stats (verify accuracy: years, patients, specialists)
+```
 
-Files to update: `index.html`, `about.html`, `services.html`, `contact.html`
+**Why this matters:** Many pages read from this config. One edit updates site-wide.
 
-### 3. Verify Contact Information
+### 2. Replace Placeholder Images
+**Status:** 🟡 Using stock dental images
+
+The website currently uses stock dental photos. Replace with real clinic photos:
+
+**Critical images:**
+- `assets/logo.png` — Your actual logo (if different)
+- `assets/favicon.png` — Browser icon (if you want custom)
+- `assets/images/hero-clinic.jpg` — Main hero (clinic exterior/interior)
+- `assets/images/about-clinic.jpg` — Reception area or treatment room
+- `assets/images/about-dentist.jpg` — Team photo
+
+**Service images** (nice to have):
+- All images in `assets/images/` can be replaced with actual procedure photos
+
+**Note:** If you keep filenames the same, no code changes needed!
+
+### 3. Add Social Media Links
+**Status:** 🟡 Placeholders in config
+
+Update in `js/clinic-config.js`:
+
+```javascript
+social: {
+  facebook: "https://facebook.com/yourpage",  // Update or leave "#"
+  instagram: "https://instagram.com/yourpage", // Update or leave "#"
+  whatsappCTA: "..." // Already configured ✅
+}
+```
+
+### 4. Verify Contact Information
 **Status:** 🟢 Using publicly listed info
 
-Current information:
+Current information (in `clinic-config.js`):
 - **Phone:** 84623 18437
 - **Email:** info@hitechdentalnizamabad.com
 - **Address:** Opp. Rajiv Gandhi Auditorium, Tilak Gardens, Khaleelwadi, Nizamabad
 
 **Action needed:** 
-- Confirm the email address works (set up if needed)
-- Add alternative phone number if desired (note: 8462224453 was mentioned in listings)
-- Verify address details
+- ✅ Confirm email inbox is active and monitored
+- ✅ Verify phone number is correct
+- ✅ Test WhatsApp link works
+- ⚠️ Alternative phone (8462224453) was mentioned in some listings — add if desired
 
-## Medium Priority
+---
 
-### 4. Doctor Profile Photos
+## Medium Priority (First Month)
+
+### 5. Doctor Profile Photos
 **Status:** 🟡 Partial
 
 - ✅ Dr. Krishna Teja has a photo
@@ -49,7 +88,7 @@ Current information:
 
 Add professional photos for all doctors to build trust with patients.
 
-### 5. Customize Testimonials
+### 6. Customize Testimonials
 **Status:** 🟢 Generic but realistic
 
 Current testimonials use common patient names and towns. Consider:
@@ -57,7 +96,7 @@ Current testimonials use common patient names and towns. Consider:
 - Adding photos (optional)
 - Getting Google reviews and showcasing them
 
-### 6. Review Service Pricing
+### 7. Review Service Pricing
 **Status:** ℹ️ Not displayed
 
 The website mentions "affordable" and "transparent pricing" but doesn't show prices. Consider:
@@ -65,9 +104,11 @@ The website mentions "affordable" and "transparent pricing" but doesn't show pri
 - Or noting "Contact for quote"
 - Or stating "Starting from ₹XXX"
 
-## Low Priority
+---
 
-### 7. Add More Content
+## Low Priority (Ongoing Enhancement)
+
+### 8. Add More Content
 **Optional enhancements:**
 
 - Blog section for dental health tips
@@ -76,7 +117,7 @@ The website mentions "affordable" and "transparent pricing" but doesn't show pri
 - Online appointment booking system (requires backend)
 - Patient testimonials page
 
-### 8. Analytics & SEO
+### 9. Analytics & SEO
 **Recommended:**
 
 - Set up Google Analytics
@@ -84,23 +125,25 @@ The website mentions "affordable" and "transparent pricing" but doesn't show pri
 - Set up Google Business Profile (if not already done)
 - Get patient reviews on Google
 
-### 9. Legal Pages
+### 10. Legal Pages
 **Good to have:**
 
 - Privacy Policy (especially if collecting patient data online)
 - Terms of Service
 - Disclaimer
 
-## Technical Items
+---
 
-### 10. Domain & Hosting
+## Technical Items (One-Time Setup)
+
+### 11. Domain & Hosting
 **Current:** Not deployed
 
 - Register domain: `hitechdentalnizamabad.com` (or preferred name)
 - Set up hosting (GitHub Pages, Netlify, or traditional hosting)
 - Configure SSL certificate (auto with modern hosts)
 
-### 11. Form Integration
+### 12. Form Integration
 **Current:** Contact form shows thank-you message locally
 
 The contact form currently just displays a confirmation message. To actually receive submissions:
@@ -112,6 +155,19 @@ Options:
 4. **Full solution:** Backend with database (requires development)
 
 **File to update:** `contact.html` form action and `js/main.js` form handler
+
+### 13. Template Rebranding (If Launching Additional Clinics)
+**Status:** ℹ️ Optional
+
+This website is built as a **reusable template**. To launch another clinic:
+
+1. Read `TEMPLATE.md` for complete rebranding instructions
+2. Duplicate repo
+3. Edit `js/clinic-config.js` with new clinic data
+4. Replace images
+5. Deploy to new domain
+
+**Use case:** If you're expanding to new locations or offering this as a service to other dentists.
 
 ---
 
