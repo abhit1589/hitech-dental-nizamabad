@@ -180,33 +180,75 @@ const CLINIC_CONFIG = {
     }
   ],
   
-  // === TESTIMONIALS ===
-  testimonials: [
-    {
-      text: "Best dental clinic in Nizamabad! The root canal was completely painless and the staff was very caring. Highly recommended.",
-      author: "Ravi Kumar",
-      location: "Nizamabad City",
-      rating: 5
-    },
-    {
-      text: "My kids love coming here. The pediatric dentist is so gentle and patient. Clean clinic with modern equipment.",
-      author: "Priya Sharma",
-      location: "Armoor",
-      rating: 5
-    },
-    {
-      text: "Got my braces done here and the results are amazing. Very reasonable pricing compared to other clinics in the district.",
-      author: "Mohammed Ali",
-      location: "Bodhan",
-      rating: 5
-    },
-    {
-      text: "Dr. Krishna Teja's dental implant work is excellent. My new teeth look and feel completely natural. Thank you!",
-      author: "Lakshmi Devi",
-      location: "Nizamabad",
-      rating: 5
-    }
-  ],
+  // === GOOGLE REVIEWS (Real 5-star reviews from Google Business Profile) ===
+  // Source: https://www.google.com/maps/place/Hi-tech+dental+hospital/@18.6741521,78.1027688,17z
+  googleReviews: {
+    rating: 4.8,
+    totalReviews: 94,
+    googleMapsUrl: "https://www.google.com/maps/place/Hi-tech+dental+hospital/@18.6741521,78.1027688,17z/data=!4m8!3m7!1s0x3bcddb2e51a7c755:0xe88fdcc518d6a148!8m2!3d18.6741521!4d78.1027688!9m1!1b1!16s%2Fg%2F11b6gjhxgm",
+    reviews: [
+      {
+        text: "I had a great experience at this dental hospital. The doctors were professional, patient, and explained the treatment clearly before starting. The staff was friendly and supportive, and the entire process was smooth and well organized. The clinic was clean, hygienic, and maintained high standards of care.",
+        author: "Haritha Kommi",
+        rating: 5
+      },
+      {
+        text: "Great experience at Hi-Tech Dental Hospital. The ambience is clean, calm, and welcoming. The doctors are friendly and provide excellent treatment. Highly recommended!",
+        author: "Akshari Gandla",
+        rating: 5
+      },
+      {
+        text: "I was really nervous before my visit, but the doctor made me feel calm and comfortable. The treatment was smooth and painless. Thank you for such great care!! Happy with the treatment.",
+        author: "Gopu Sahitha",
+        rating: 5
+      },
+      {
+        text: "HI TECH dental is very good and I recommended to visit here if you have any dental problems.",
+        author: "Anreddy a",
+        rating: 5
+      },
+      {
+        text: "My sister and I both had our orthodontic treatment at this hospital, and our experience was excellent. The entire staff was very kind, professional, and supportive throughout the treatment. Special thanks to Dr. Tirumala Naidu for his patience, clear explanations, and expertise.",
+        author: "Lubna Shazi",
+        rating: 5
+      },
+      {
+        text: "I had an amazing experience at Hi-tech dental clinic. The doctors are very humble, kind, caring, and supportive. They explain everything properly and treat patients with great patience and respect.",
+        author: "Amrita Mallavarapu",
+        rating: 5
+      },
+      {
+        text: "Excellent dental care with a friendly and professional team. The doctors explained everything clearly and made me feel comfortable throughout the treatment. Highly recommend!",
+        author: "Jayashree M",
+        rating: 5
+      },
+      {
+        text: "Treatment was top notch. Throughout the treatment I felt very comfortable and confident. Very happy with the results. I'll forever be thankful to doctors and staff. I'll definitely recommend this hospital without any doubt.",
+        author: "Anjali Reddy",
+        rating: 5
+      },
+      {
+        text: "I met with an accident with upper front teeth broken. Under the supervision of Sri K. Nanda Kumar Sir... Special thanks to Dr. Krishna Teja Sir, K. Naga Swetha Madam... Highly recommended from my bottom of my heart for anyone looking for quality dental care!",
+        author: "A Shiva Kumar Yadav",
+        rating: 5
+      },
+      {
+        text: "A wonderful experience from start to finish. Clean ambience, friendly staff, and painless treatment. Thank you, Hi-Tech Dental Hospital!",
+        author: "Sreeja Sunkara",
+        rating: 5
+      },
+      {
+        text: "I am very satisfied with doctors treatment and I feel very happy. Doctor Krishna Teja and doctor Naga Swetha suggestions are very good. Thank you Hi-tech Dental Hospital Dr. K Nandakumar.",
+        author: "Sujatha Konda",
+        rating: 5
+      },
+      {
+        text: "Had a great experience with the team. Very satisfied with the treatment. The doctors are very friendly and you can share your problem without hesitation. I highly recommend the hospital for better dental care.",
+        author: "Ummaji Srainitha",
+        rating: 5
+      }
+    ]
+  },
   
   // === TRUST STATS ===
   stats: {
