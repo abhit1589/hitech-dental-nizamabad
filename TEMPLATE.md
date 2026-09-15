@@ -15,6 +15,84 @@ This template provides everything needed to launch a professional dental clinic 
 
 ---
 
+## ⚠️ Critical Rules for New Clinic Builds
+
+**Learn from our mistakes!** Follow these rules when launching a new clinic site to avoid common issues:
+
+### 1. ✅ Real Google Reviews from Day One
+**DO:** 
+- Find the clinic's Google Business listing
+- Copy 5-12 real 5-star reviews (patient name, review text, rating)
+- Add them to `googleReviews` in `clinic-config.js`
+- Link directly to the Google Maps listing
+- Display rating badge (e.g., "4.8★ from 94 reviews")
+
+**DON'T:**
+- ❌ Use placeholder testimonials (fake names like "Ravi Kumar", "Priya Sharma")
+- ❌ Attempt to use Google Places API (requires API key, unnecessary)
+- ❌ Invent or paraphrase reviews
+- ❌ Launch without verifying the Google Business listing exists
+
+**Example structure in `clinic-config.js`:**
+```javascript
+googleReviews: {
+  rating: 4.8,
+  totalReviews: 94,
+  googleMapsUrl: "https://www.google.com/maps/place/[verified-url]",
+  reviews: [
+    { text: "Real review text...", author: "Real Patient Name", rating: 5 }
+  ]
+}
+```
+
+### 2. ✅ No Opacity Animations on Large Sections
+**DON'T:**
+- ❌ Use `opacity: 0` on `.section` wrappers for scroll reveal animations
+- ❌ Hide entire page sections waiting for JavaScript
+
+**WHY:** Content becomes invisible if JavaScript fails/delays, hurting SEO and user experience.
+
+**DO:**
+- ✅ Animate individual cards/elements within sections
+- ✅ Use `transform` instead of `opacity` for reveals
+- ✅ Ensure content is always visible, even without JS
+
+### 3. ✅ Book Appointment Button Positioning
+**DO:**
+- ✅ Position at true bottom of viewport (`bottom: 20px`)
+- ✅ Clear spacing from WhatsApp widget (different position)
+- ✅ Use absolute paths for nested pages (`href="/contact.html"`, not `../contact.html`)
+- ✅ Test from service detail pages, doctor pages, area pages
+
+**DON'T:**
+- ❌ Overlap with WhatsApp button
+- ❌ Use relative paths that break on nested pages
+- ❌ Position too high (blocks content)
+
+### 4. ✅ Full Service Pages from Launch
+**DO:**
+- ✅ Create complete service detail pages for all services
+- ✅ Use `clinic-config.js` as single source of truth
+- ✅ Include pricing guidance, FAQs, before/after info
+- ✅ Link from services grid on homepage
+
+**DON'T:**
+- ❌ Launch with stub pages or TODO placeholders
+- ❌ Hard-code service info in HTML (use config)
+
+### 5. ✅ Deploy to Production Properly
+**DO:**
+- ✅ Merge to `master` branch for Vercel production deployment
+- ✅ Verify all changes on preview URL before merging
+- ✅ Test mobile responsiveness
+- ✅ Check all internal links
+
+**DON'T:**
+- ❌ Leave changes on feature branches indefinitely
+- ❌ Deploy to production without testing preview
+
+---
+
 ## 🚀 Quick Start: Launch Your Clinic Website
 
 ### Prerequisites
@@ -87,15 +165,21 @@ const CLINIC_CONFIG = {
     // Keep existing or customize
   ],
   
-  // Update testimonials with real reviews
-  testimonials: [
-    {
-      text: "Real patient review...",
-      author: "Patient Name",
-      location: "City",
-      rating: 5
-    }
-  ],
+  // IMPORTANT: Use real Google reviews, not placeholders!
+  // Find clinic's Google Business listing and copy 5-12 actual 5-star reviews
+  googleReviews: {
+    rating: 4.8,  // Real Google rating
+    totalReviews: 94,  // Actual review count
+    googleMapsUrl: "https://www.google.com/maps/place/[clinic-name]",  // Direct link to listing
+    reviews: [
+      {
+        text: "Real review text from Google...",
+        author: "Real Patient Name",  // From actual Google review
+        rating: 5
+      }
+      // Add 5-12 real 5-star reviews
+    ]
+  },
   
   // Update trust stats honestly
   stats: {

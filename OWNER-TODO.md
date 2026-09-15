@@ -6,6 +6,40 @@ This file lists items that the clinic owner should update to personalize the Hi-
 
 ---
 
+## ⚠️ Critical Rules (Lessons Learned)
+
+**For new clinic builds, follow these rules to avoid common issues:**
+
+### ✅ Version 1: Real Google Reviews Only
+- **DO**: Find the clinic's Google Business listing and copy 5-12 real 5-star reviews
+- **DON'T**: Use placeholder testimonials with fake names
+- **DON'T**: Attempt to use Google Places API (requires key, unnecessary)
+- **Structure**: Use `googleReviews` in `clinic-config.js` with real rating, review count, and Maps URL
+- **Attribution**: Always link to the actual Google Maps listing
+
+### ✅ No Opacity on Large Sections
+- **DON'T**: Use `opacity: 0` on `.section` wrappers for scroll animations
+- **WHY**: Content becomes invisible if JavaScript fails, hurting SEO
+- **DO**: Animate individual elements, use `transform` instead of `opacity`
+
+### ✅ Book Appointment Float Positioning
+- **DO**: Position at true bottom (`bottom: 20px`)
+- **DO**: Clear spacing from WhatsApp widget
+- **DO**: Use absolute paths (`/contact.html`, not `../contact.html`)
+- **DON'T**: Overlap buttons or use relative paths that break on nested pages
+
+### ✅ Full Service Pages from Day One
+- **DO**: Create complete service detail pages for all services
+- **DO**: Use `clinic-config.js` as single source of truth
+- **DON'T**: Launch with stub pages or TODO placeholders
+
+### ✅ Merge to Master for Production
+- **DO**: Merge changes to `master` branch for Vercel deployment
+- **DO**: Test preview URLs before merging
+- **DON'T**: Leave production updates on feature branches
+
+---
+
 ## High Priority (Pre-Launch)
 
 ### 1. Update Centralized Configuration
@@ -25,7 +59,7 @@ The website uses a centralized config file. Update these values to ensure accura
 - social.facebook (add real URL or leave "#")
 - social.instagram (add real URL or leave "#")
 - doctors array (verify credentials)
-- testimonials (replace with real patient reviews)
+- googleReviews (✅ NOW USING REAL 5-STAR GOOGLE REVIEWS - Updated 2026-09-15)
 - stats (verify accuracy: years, patients, specialists)
 ```
 
