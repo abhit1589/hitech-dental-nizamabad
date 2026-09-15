@@ -118,31 +118,94 @@ function initHeroSlider() {
 }
 
 /**
- * Testimonial rotation
+ * Google Reviews Auto-Scrolling Carousel
+ * Smoothly scrolls review cards, pauses on hover, respects reduced motion
  */
 function initTestimonialRotation() {
   const testimonialsGrid = document.querySelector('.testimonials-grid');
-  if (!testimonialsGrid || prefersReducedMotion) return;
+  if (!testimonialsGrid) return;
 
-  const testimonials = Array.from(testimonialsGrid.children);
-  if (testimonials.length <= 3) return; // No need to rotate if 3 or fewer
-
-  let currentSet = 0;
-  const itemsToShow = window.innerWidth >= 900 ? 3 : 1;
-
-  function rotateTestimonials() {
-    testimonials.forEach(t => t.style.display = 'none');
-    
-    for (let i = 0; i < itemsToShow; i++) {
-      const index = (currentSet * itemsToShow + i) % testimonials.length;
-      testimonials[index].style.display = 'block';
-    }
-    
-    currentSet = (currentSet + 1) % Math.ceil(testimonials.length / itemsToShow);
+  // Respect prefers-reduced-motion: use static grid instead
+  if (prefersReducedMotion) {
+    testimonialsGrid.style.display = 'grid';
+    return;
   }
 
-  rotateTestimonials(); // Initial display
-  setInterval(rotateTestimonials, 8000); // Rotate every 8 seconds
+  const testimonials = Array.from(testimonialsGrid.children);
+  if (testimonials.length === 0) return;
+
+  // Clone testimonials for infinite scroll effect
+  const clonedTestimonials = testimonials.map(card => card.cloneNode(true));
+  clonedTestimonials.forEach(clone => testimonialsGrid.appendChild(clone));
+
+  let scrollPosition = 0;
+  let isHovering = false;
+  let isTouching = false;
+  let animationId = null;
+  const scrollSpeed = 0.5; // pixels per frame
+
+  // Auto-scroll function
+  function autoScroll() {
+    if (!isHovering && !isTouching) {
+      scrollPosition += scrollSpeed;
+      testimonialsGrid.scrollLeft = scrollPosition;
+
+      // Reset scroll position for infinite loop
+      const maxScroll = testimonialsGrid.scrollWidth / 2;
+      if (scrollPosition >= maxScroll) {
+        scrollPosition = 0;
+        testimonialsGrid.scrollLeft = 0;
+      }
+    }
+    animationId = requestAnimationFrame(autoScroll);
+  }
+
+  // Start auto-scrolling
+  autoScroll();
+
+  // Pause on hover
+  testimonialsGrid.addEventListener('mouseenter', () => {
+    isHovering = true;
+  });
+
+  testimonialsGrid.addEventListener('mouseleave', () => {
+    isHovering = false;
+  });
+
+  // Pause on touch/drag
+  testimonialsGrid.addEventListener('touchstart', () => {
+    isTouching = true;
+  });
+
+  testimonialsGrid.addEventListener('touchend', () => {
+    setTimeout(() => {
+      isTouching = false;
+      scrollPosition = testimonialsGrid.scrollLeft;
+    }, 500);
+  });
+
+  // Handle manual scroll
+  testimonialsGrid.addEventListener('scroll', (e) => {
+    if (isHovering || isTouching) {
+      scrollPosition = e.target.scrollLeft;
+    }
+  });
+
+  // Focus pause (accessibility)
+  testimonialsGrid.addEventListener('focusin', () => {
+    isHovering = true;
+  });
+
+  testimonialsGrid.addEventListener('focusout', () => {
+    isHovering = false;
+  });
+
+  // Cleanup on page unload
+  window.addEventListener('beforeunload', () => {
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+    }
+  });
 }
 
 /**
