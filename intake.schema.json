@@ -1,0 +1,381 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Dental Clinic Intake Schema",
+  "description": "Complete intake data required to generate a Launch Path Studio dental clinic website",
+  "type": "object",
+  "required": [
+    "name",
+    "shortName",
+    "tagline",
+    "city",
+    "state",
+    "country",
+    "contact",
+    "hours",
+    "domain",
+    "googleMapsUrl",
+    "logoPath",
+    "doctors",
+    "services",
+    "googleReviews"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Full clinic name as it appears legally",
+      "examples": ["Hi-tech Dental Hospital"]
+    },
+    "shortName": {
+      "type": "string",
+      "description": "Shorter version for display",
+      "examples": ["Hitech Dental Clinic"]
+    },
+    "tagline": {
+      "type": "string",
+      "description": "Brief tagline for hero section",
+      "examples": ["Expert Dental Care in Nizamabad"]
+    },
+    "city": {
+      "type": "string",
+      "description": "Primary city location",
+      "examples": ["Nizamabad"]
+    },
+    "state": {
+      "type": "string",
+      "description": "State/province",
+      "examples": ["Telangana"]
+    },
+    "country": {
+      "type": "string",
+      "description": "Country",
+      "examples": ["India"]
+    },
+    "contact": {
+      "type": "object",
+      "required": ["phone", "phoneLink", "whatsapp", "email", "address", "coordinates"],
+      "properties": {
+        "phone": {
+          "type": "string",
+          "description": "Display format phone number",
+          "examples": ["84623 18437"]
+        },
+        "phoneFormatted": {
+          "type": "string",
+          "description": "Formatted phone for display with country code",
+          "examples": ["+91-84623-18437"]
+        },
+        "phoneLink": {
+          "type": "string",
+          "description": "Phone number for tel: links (no spaces or dashes)",
+          "examples": ["+918462318437"]
+        },
+        "whatsapp": {
+          "type": "string",
+          "description": "WhatsApp number (country code + number, no + or spaces)",
+          "examples": ["918462318437"]
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Contact email address",
+          "examples": ["info@hitechdentalnizamabad.com"]
+        },
+        "address": {
+          "type": "object",
+          "required": ["line1", "city", "state", "zip", "country"],
+          "properties": {
+            "line1": {
+              "type": "string",
+              "description": "Street address line 1",
+              "examples": ["Opp. Rajiv Gandhi Auditorium"]
+            },
+            "line2": {
+              "type": "string",
+              "description": "Street address line 2 (area/landmark)",
+              "examples": ["Tilak Gardens, Khaleelwadi"]
+            },
+            "city": {
+              "type": "string",
+              "examples": ["Nizamabad"]
+            },
+            "state": {
+              "type": "string",
+              "examples": ["Telangana"]
+            },
+            "zip": {
+              "type": "string",
+              "examples": ["503001"]
+            },
+            "country": {
+              "type": "string",
+              "examples": ["India"]
+            }
+          }
+        },
+        "coordinates": {
+          "type": "object",
+          "required": ["lat", "lng"],
+          "description": "GPS coordinates for Google Maps embedding (from Google Maps URL)",
+          "properties": {
+            "lat": {
+              "type": "number",
+              "examples": [18.6740226]
+            },
+            "lng": {
+              "type": "number",
+              "examples": [78.1027477]
+            }
+          }
+        }
+      }
+    },
+    "hours": {
+      "type": "object",
+      "required": ["weekdays", "saturday", "sunday", "displayShort"],
+      "properties": {
+        "weekdays": {
+          "type": "string",
+          "description": "Monday-Friday hours",
+          "examples": ["10:00 AM – 9:00 PM"]
+        },
+        "saturday": {
+          "type": "string",
+          "description": "Saturday hours",
+          "examples": ["10:00 AM – 9:00 PM"]
+        },
+        "sunday": {
+          "type": "string",
+          "description": "Sunday hours (or 'Closed')",
+          "examples": ["10:30 AM – 1:00 PM", "Closed"]
+        },
+        "displayShort": {
+          "type": "string",
+          "description": "Compact hours display for footer/CTA",
+          "examples": ["Mon–Sat: 10 AM–9 PM • Sun: 10:30 AM–1 PM"]
+        }
+      }
+    },
+    "domain": {
+      "type": "string",
+      "description": "Final custom domain where site will be hosted (NO https://)",
+      "examples": ["hitechdentalnizamabad.com"]
+    },
+    "googleMapsUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Full Google Maps listing URL (for extracting coords and reviews)",
+      "examples": ["https://www.google.com/maps/place/Hi-tech+dental+hospital/@18.6741521,78.1027688,17z"]
+    },
+    "logoPath": {
+      "type": "string",
+      "description": "Path to clinic logo file (relative to assets/)",
+      "examples": ["logo.png"]
+    },
+    "brandColors": {
+      "type": "object",
+      "description": "Optional: Override default brand colors (extracted from logo by default)",
+      "properties": {
+        "primaryColor": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "examples": ["#662D91"]
+        },
+        "secondaryColor": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "examples": ["#E31E24"]
+        },
+        "accentColor": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "examples": ["#00A651"]
+        }
+      }
+    },
+    "doctors": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Array of doctors/specialists at the clinic",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "degree", "specialty", "bio", "specialties"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "URL-safe slug (lowercase, hyphens)",
+            "examples": ["nanda-kumar"]
+          },
+          "name": {
+            "type": "string",
+            "description": "Full doctor name with title",
+            "examples": ["Dr. Nanda Kumar Kommineni"]
+          },
+          "degree": {
+            "type": "string",
+            "description": "Degrees and qualifications",
+            "examples": ["M.D.S — Conservative Dentistry & Endodontics"]
+          },
+          "specialty": {
+            "type": "string",
+            "description": "Primary specialty for display",
+            "examples": ["Endodontist (Root Canal Specialist)"]
+          },
+          "bio": {
+            "type": "string",
+            "description": "Short one-line bio/achievement",
+            "examples": ["Gold Medallist • First M.D.S in Nizamabad District"]
+          },
+          "image": {
+            "type": ["string", "null"],
+            "description": "Photo filename (in assets/images/) or null for icon",
+            "examples": ["dr-krishna-teja.jpg", null]
+          },
+          "specialties": {
+            "type": "array",
+            "minItems": 1,
+            "description": "List of 2-4 specialties",
+            "items": {
+              "type": "string"
+            },
+            "examples": [["Root Canal Treatment", "Cosmetic Restorations", "Endodontics"]]
+          }
+        }
+      }
+    },
+    "services": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Services offered by the clinic (9-12 services typical)",
+      "items": {
+        "type": "object",
+        "required": ["slug", "title", "shortDesc", "icon"],
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "URL-safe slug",
+            "examples": ["teeth-cleaning"]
+          },
+          "title": {
+            "type": "string",
+            "description": "Service display name",
+            "examples": ["Teeth Cleaning & Scaling"]
+          },
+          "shortDesc": {
+            "type": "string",
+            "description": "One-line description for cards",
+            "examples": ["Professional cleaning to remove plaque, tartar and stains for a brighter, healthier smile."]
+          },
+          "icon": {
+            "type": "string",
+            "description": "Emoji icon for service card",
+            "examples": ["🦷"]
+          },
+          "image": {
+            "type": "string",
+            "description": "Image filename (optional, defaults to {slug}.jpg)",
+            "examples": ["teeth-cleaning.jpg"]
+          }
+        }
+      }
+    },
+    "googleReviews": {
+      "type": "object",
+      "required": ["reviews"],
+      "description": "CRITICAL: Real 5-star Google reviews ONLY (no aggregate stats)",
+      "properties": {
+        "reviews": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 15,
+          "description": "Individual 5-star reviews (8-12 recommended for scrolling effect)",
+          "items": {
+            "type": "object",
+            "required": ["text", "author", "rating"],
+            "properties": {
+              "text": {
+                "type": "string",
+                "description": "Full review text exactly as written on Google"
+              },
+              "author": {
+                "type": "string",
+                "description": "Reviewer name exactly as shown on Google"
+              },
+              "rating": {
+                "type": "integer",
+                "const": 5,
+                "description": "MUST be 5 (only 5-star reviews allowed)"
+              }
+            }
+          }
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "description": "Trust statistics for homepage",
+      "properties": {
+        "yearsExperience": {
+          "type": "integer",
+          "description": "Years the clinic has been operating",
+          "examples": [15]
+        },
+        "happyPatients": {
+          "type": "string",
+          "description": "Approximate patient count (formatted)",
+          "examples": ["10,000+"]
+        },
+        "specialists": {
+          "type": "integer",
+          "description": "Number of specialist doctors",
+          "examples": [3]
+        },
+        "services": {
+          "type": "integer",
+          "description": "Number of services offered",
+          "examples": [20]
+        }
+      }
+    },
+    "areas": {
+      "type": "array",
+      "description": "Optional: Local SEO areas/towns served",
+      "items": {
+        "type": "object",
+        "required": ["name", "distance", "slug"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Area/town name",
+            "examples": ["Bodhan"]
+          },
+          "distance": {
+            "type": "string",
+            "description": "Distance from clinic",
+            "examples": ["35 km"]
+          },
+          "slug": {
+            "type": "string",
+            "description": "URL-safe slug (lowercase)",
+            "examples": ["bodhan"]
+          }
+        }
+      }
+    },
+    "social": {
+      "type": "object",
+      "description": "Optional: Social media links",
+      "properties": {
+        "facebook": {
+          "type": "string",
+          "description": "Facebook page URL or # for none",
+          "examples": ["https://facebook.com/yourclinic", "#"]
+        },
+        "instagram": {
+          "type": "string",
+          "description": "Instagram profile URL or # for none",
+          "examples": ["https://instagram.com/yourclinic", "#"]
+        }
+      }
+    }
+  }
+}
