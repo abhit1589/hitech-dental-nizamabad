@@ -182,9 +182,11 @@ const CLINIC_CONFIG = {
   
   // === GOOGLE REVIEWS (Real 5-star reviews from Google Business Profile) ===
   // Source: https://www.google.com/maps/place/Hi-tech+dental+hospital/@18.6741521,78.1027688,17z
+  // Note: rating and totalReviews fields are not displayed per template product rule
+  // (startups may have few/no reviews; show individual 5★ cards only)
   googleReviews: {
-    rating: 4.8,
-    totalReviews: 94,
+    // rating: 4.8,  // Not displayed
+    // totalReviews: 94,  // Not displayed
     googleMapsUrl: "https://www.google.com/maps/place/Hi-tech+dental+hospital/@18.6741521,78.1027688,17z/data=!4m8!3m7!1s0x3bcddb2e51a7c755:0xe88fdcc518d6a148!8m2!3d18.6741521!4d78.1027688!9m1!1b1!16s%2Fg%2F11b6gjhxgm",
     reviews: [
       {

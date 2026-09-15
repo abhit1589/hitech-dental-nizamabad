@@ -52,19 +52,22 @@ This template provides everything needed for a professional dental clinic websit
 - Copy 5-12 real 5-star reviews (patient name, review text, rating)
 - Add them to `googleReviews` in `clinic-config.js`
 - Link directly to the Google Maps listing
-- Display rating badge (e.g., "4.8★ from 94 reviews")
+- **Display individual 5★ review cards only** (no aggregate rating/count badge)
 
 **DON'T:**
 - ❌ Use placeholder testimonials (fake names like "Ravi Kumar", "Priya Sharma")
 - ❌ Attempt to use Google Places API (requires API key, unnecessary)
 - ❌ Invent or paraphrase reviews
 - ❌ Launch without verifying the Google Business listing exists
+- ❌ **Display aggregate rating (e.g., "4.8/5") or total review count** (startups may have few/no reviews)
+
+**Why no aggregate rating?** Some new clinic clients have very few or no Google reviews yet. The site should work beautifully whether they have 5 reviews or 500. Show individual 5★ review cards in the carousel, and link to Google for visitors to read more or leave a review.
 
 **Example structure in `clinic-config.js`:**
 ```javascript
 googleReviews: {
-  rating: 4.8,
-  totalReviews: 94,
+  // rating: 4.8,  // Not displayed per product rule
+  // totalReviews: 94,  // Not displayed per product rule
   googleMapsUrl: "https://www.google.com/maps/place/[verified-url]",
   reviews: [
     { text: "Real review text...", author: "Real Patient Name", rating: 5 }
@@ -217,19 +220,23 @@ const CLINIC_CONFIG = {
   // 3. Click "Reviews" tab
   // 4. Filter/find 5-star reviews with text
   // 5. Copy reviewer name and review text exactly
-  // 6. Get overall rating and total count from listing
-  // 7. Copy the Google Maps URL
+  // 6. Copy the Google Maps URL
+  // 
+  // PRODUCT RULE: Do NOT display aggregate rating or total review count
+  // (Some startup clients have few/no reviews; site must work without stats)
   // 
   // FEATURES INCLUDED:
   // ✅ Auto-scrolling carousel (smooth horizontal scroll)
+  // ✅ Individual 5★ review cards displayed
+  // ✅ Link to Google Maps for full reviews
   // ✅ Pauses on hover/touch/focus
   // ✅ Mobile swipe-friendly
   // ✅ Respects prefers-reduced-motion
   // ✅ No API key required!
   //
   googleReviews: {
-    rating: 4.8,  // Real Google rating (copy from Maps listing)
-    totalReviews: 94,  // Actual review count (copy from Maps listing)
+    // rating: 4.8,  // NOT DISPLAYED per product rule
+    // totalReviews: 94,  // NOT DISPLAYED per product rule
     googleMapsUrl: "https://www.google.com/maps/place/[full-clinic-maps-url]",
     reviews: [
       {
@@ -244,6 +251,7 @@ const CLINIC_CONFIG = {
       }
       // Add 8-12 real 5-star reviews total
       // More reviews = better infinite scroll effect
+      // If clinic has <5 reviews, use what's available + CTA to leave review
     ]
   },
   
