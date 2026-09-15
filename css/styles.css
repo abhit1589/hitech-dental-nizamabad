@@ -623,11 +623,61 @@ a:hover { color: var(--red); }
 }
 .stat span { color: var(--gray); font-size: 0.9rem; }
 
-/* ── Testimonials ── */
+/* ── Testimonials / Google Reviews ── */
 .testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 28px;
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--purple) var(--light-gray);
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 0;
+  margin: 0 -24px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Hide scrollbar for Webkit browsers */
+.testimonials-grid::-webkit-scrollbar {
+  height: 6px;
+}
+
+.testimonials-grid::-webkit-scrollbar-track {
+  background: var(--light-gray);
+  border-radius: 3px;
+}
+
+.testimonials-grid::-webkit-scrollbar-thumb {
+  background: var(--purple);
+  border-radius: 3px;
+}
+
+.testimonials-grid::-webkit-scrollbar-thumb:hover {
+  background: var(--red);
+}
+
+/* Auto-scroll animation */
+@media (prefers-reduced-motion: no-preference) {
+  .testimonials-grid.auto-scrolling {
+    animation: testimonial-scroll 60s linear infinite;
+  }
+
+  .testimonials-grid.auto-scrolling:hover {
+    animation-play-state: paused;
+  }
+}
+
+/* Fallback: Static grid for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 .testimonial-card {
@@ -636,12 +686,33 @@ a:hover { color: var(--red); }
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   border-left: 4px solid var(--green);
+  flex: 0 0 340px;
+  scroll-snap-align: start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.testimonial-card .stars { color: #f5a623; font-size: 1.1rem; margin-bottom: 12px; }
-.testimonial-card p { color: var(--gray); font-style: italic; margin-bottom: 16px; }
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-card {
+    flex: 1 1 300px;
+  }
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.testimonial-card .stars { color: #FBBC04; font-size: 1.2rem; margin-bottom: 12px; }
+.testimonial-card p { color: var(--gray); font-style: italic; margin-bottom: 16px; line-height: 1.6; }
 .testimonial-card .author { font-weight: 600; color: var(--purple); }
 .testimonial-card .location { color: var(--gray); font-size: 0.85rem; }
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .testimonial-card {
+    flex: 0 0 280px;
+  }
+}
 
 /* ── CTA Banner ── */
 .cta-banner {
