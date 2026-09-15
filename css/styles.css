@@ -221,11 +221,22 @@ a:hover { color: var(--red); }
   box-shadow: var(--shadow);
   transition: transform var(--transition), box-shadow var(--transition);
   border-top: 4px solid var(--green);
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .service-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-lg);
+}
+
+.service-card-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--purple);
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .service-card img { height: 180px; width: 100%; object-fit: cover; }
@@ -903,6 +914,7 @@ a:hover { color: var(--red); }
   align-items: center;
   gap: 0;
   text-decoration: none;
+  transition: bottom 0.3s ease;
 }
 
 .whatsapp-float__bubble {
@@ -965,5 +977,339 @@ a:hover { color: var(--red); }
   .whatsapp-float__btn {
     width: 52px;
     height: 52px;
+  }
+}
+
+/* ── Sticky Mobile CTA (Book Appointment) ── */
+.sticky-mobile-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  padding: 12px 16px;
+  padding-right: 80px; /* Leave space for WhatsApp button */
+  background: var(--white);
+  box-shadow: 0 -2px 16px rgba(102, 45, 145, 0.15);
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.sticky-mobile-cta.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.sticky-mobile-cta .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-mobile-cta {
+    transition: none;
+  }
+}
+
+/* ── Service Detail Pages ── */
+.service-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 48px;
+  align-items: start;
+}
+
+.service-detail-content {
+  max-width: 800px;
+}
+
+.service-detail-content h2 {
+  color: var(--purple);
+  font-size: 1.5rem;
+  margin: 40px 0 16px;
+}
+
+.service-detail-content h2:first-of-type {
+  margin-top: 24px;
+}
+
+.service-detail-content p {
+  color: var(--gray);
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+.service-detail-content ul {
+  color: var(--gray);
+  margin: 16px 0 24px 24px;
+  line-height: 1.9;
+}
+
+.service-detail-content li {
+  margin-bottom: 12px;
+}
+
+.service-detail-content li strong {
+  color: var(--purple);
+}
+
+/* Image Placeholder */
+.service-image-placeholder {
+  width: 100%;
+  height: 320px;
+  background: var(--light-gray);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 32px;
+  border: 2px dashed #d0d0d8;
+}
+
+.placeholder-text {
+  font-size: 1.1rem;
+  color: var(--gray);
+  font-weight: 600;
+}
+
+.placeholder-text small {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #999;
+}
+
+/* Benefits Grid */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin: 24px 0;
+}
+
+.benefit-item {
+  background: var(--cream);
+  padding: 24px;
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.benefit-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  background: linear-gradient(135deg, var(--purple), var(--red));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--white);
+}
+
+.benefit-item h3 {
+  color: var(--purple);
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+
+.benefit-item p {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Procedure Steps */
+.procedure-steps {
+  margin: 24px 0;
+}
+
+.step {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 24px;
+  align-items: flex-start;
+}
+
+.step-number {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--purple), var(--red));
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-content h3 {
+  color: var(--purple);
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.step-content p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* FAQ List */
+.faq-list {
+  margin: 24px 0;
+}
+
+.faq-item {
+  background: var(--cream);
+  padding: 24px;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  border-left: 4px solid var(--green);
+}
+
+.faq-item h3 {
+  color: var(--purple);
+  font-size: 1.05rem;
+  margin-bottom: 12px;
+}
+
+.faq-item p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Service CTA */
+.service-cta {
+  background: linear-gradient(135deg, var(--purple), var(--red));
+  color: var(--white);
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  margin: 48px 0;
+}
+
+.service-cta h2 {
+  color: var(--white);
+  margin-top: 0;
+}
+
+.service-cta p {
+  color: rgba(255,255,255,0.9);
+  font-size: 1.05rem;
+  margin-bottom: 24px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Service Sidebar */
+.service-sidebar {
+  position: sticky;
+  top: 100px;
+}
+
+.sidebar-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+
+.sidebar-card h3 {
+  color: var(--purple);
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+
+.sidebar-card p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.sidebar-cta {
+  background: var(--cream);
+  text-align: center;
+}
+
+.service-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.service-links li {
+  margin-bottom: 12px;
+}
+
+.service-links a {
+  display: block;
+  color: var(--purple);
+  font-weight: 500;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background var(--transition);
+}
+
+.service-links a:hover {
+  background: var(--light-gray);
+  color: var(--red);
+}
+
+.btn-sm {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+}
+
+/* Responsive Service Detail */
+@media (max-width: 900px) {
+  .service-detail-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .service-sidebar {
+    position: static;
+  }
+
+  .service-image-placeholder {
+    height: 240px;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cta-buttons .btn {
+    width: 100%;
+  }
+
+  .step {
+    gap: 16px;
+  }
+
+  .step-number {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
   }
 }

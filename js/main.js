@@ -1,6 +1,19 @@
+/**
+ * Hi-tech Dental Hospital - Main JavaScript
+ * Handles: WhatsApp widget, mobile menu, forms, dynamic features
+ * Respects prefers-reduced-motion for accessibility
+ */
+
+// Check if animations should be reduced
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// WhatsApp configuration
 const WHATSAPP_NUMBER = '918462318437';
 const WHATSAPP_MESSAGE = 'Hello, I would like to book an appointment at Hi-tech Dental Hospital.';
 
+/**
+ * Initialize WhatsApp floating widget
+ */
 function initWhatsAppWidget() {
   if (document.querySelector('.whatsapp-float')) return;
 
@@ -23,11 +36,15 @@ function initWhatsAppWidget() {
   document.body.appendChild(link);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  initWhatsAppWidget();
-
+/**
+ * Mobile menu functionality
+ */
+function initMobileMenu() {
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.nav');
+  
+  if (!toggle || !nav) return;
+
   const overlay = document.createElement('div');
   overlay.className = 'nav-overlay';
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:999;opacity:0;pointer-events:none;transition:opacity 0.3s';
@@ -40,17 +57,21 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }
 
-  if (toggle && nav) {
-    toggle.addEventListener('click', () => {
-      const isOpen = nav.classList.toggle('open');
-      overlay.style.opacity = isOpen ? '1' : '0';
-      overlay.style.pointerEvents = isOpen ? 'auto' : 'none';
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-    overlay.addEventListener('click', closeNav);
-    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeNav));
-  }
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    overlay.style.opacity = isOpen ? '1' : '0';
+    overlay.style.pointerEvents = isOpen ? 'auto' : 'none';
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
 
+  overlay.addEventListener('click', closeNav);
+  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeNav));
+}
+
+/**
+ * Form handling with thank-you feedback
+ */
+function initFormHandling() {
   document.querySelectorAll('form[data-form]').forEach(form => {
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -67,4 +88,344 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 3000);
     });
   });
+}
+
+/**
+ * Hero image slider/crossfade
+ */
+function initHeroSlider() {
+  const heroContainer = document.querySelector('.hero');
+  const heroBg = document.querySelector('.hero-bg');
+  
+  if (!heroContainer || !heroBg || prefersReducedMotion) return;
+
+  // Hero images from config or fallback
+  const images = [
+    'assets/images/hero-clinic.jpg',
+    'assets/images/about-clinic.jpg',
+    'assets/images/about-dentist.jpg'
+  ];
+
+  let currentIndex = 0;
+
+  function changeHeroImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    heroBg.style.backgroundImage = `url('${images[currentIndex]}')`;
+  }
+
+  // Change image every 5 seconds
+  setInterval(changeHeroImage, 5000);
+}
+
+/**
+ * Testimonial rotation
+ */
+function initTestimonialRotation() {
+  const testimonialsGrid = document.querySelector('.testimonials-grid');
+  if (!testimonialsGrid || prefersReducedMotion) return;
+
+  const testimonials = Array.from(testimonialsGrid.children);
+  if (testimonials.length <= 3) return; // No need to rotate if 3 or fewer
+
+  let currentSet = 0;
+  const itemsToShow = window.innerWidth >= 900 ? 3 : 1;
+
+  function rotateTestimonials() {
+    testimonials.forEach(t => t.style.display = 'none');
+    
+    for (let i = 0; i < itemsToShow; i++) {
+      const index = (currentSet * itemsToShow + i) % testimonials.length;
+      testimonials[index].style.display = 'block';
+    }
+    
+    currentSet = (currentSet + 1) % Math.ceil(testimonials.length / itemsToShow);
+  }
+
+  rotateTestimonials(); // Initial display
+  setInterval(rotateTestimonials, 8000); // Rotate every 8 seconds
+}
+
+/**
+ * FAQ accordion functionality
+ */
+function initFAQAccordion() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  
+  faqItems.forEach((item, index) => {
+    const question = item.querySelector('h3');
+    const answer = item.querySelector('p');
+    
+    if (!question || !answer) return;
+
+    // Wrap for better control
+    const wrapper = document.createElement('div');
+    wrapper.className = 'faq-answer-wrapper';
+    answer.parentNode.insertBefore(wrapper, answer);
+    wrapper.appendChild(answer);
+
+    // Start collapsed except first one
+    if (index !== 0) {
+      wrapper.style.maxHeight = '0';
+      wrapper.style.overflow = 'hidden';
+      wrapper.style.transition = 'max-height 0.3s ease';
+      item.classList.add('collapsed');
+    } else {
+      wrapper.style.maxHeight = answer.scrollHeight + 'px';
+      item.classList.add('expanded');
+    }
+
+    // Make question clickable
+    question.style.cursor = 'pointer';
+    question.setAttribute('role', 'button');
+    question.setAttribute('aria-expanded', index === 0 ? 'true' : 'false');
+    question.setAttribute('tabindex', '0');
+
+    // Add toggle icon
+    const icon = document.createElement('span');
+    icon.className = 'faq-icon';
+    icon.textContent = index === 0 ? '−' : '+';
+    icon.style.cssText = 'float:right;font-size:1.5rem;font-weight:bold;color:var(--purple);';
+    question.appendChild(icon);
+
+    function toggle() {
+      const isExpanded = item.classList.contains('expanded');
+      
+      if (isExpanded) {
+        wrapper.style.maxHeight = '0';
+        item.classList.remove('expanded');
+        item.classList.add('collapsed');
+        icon.textContent = '+';
+        question.setAttribute('aria-expanded', 'false');
+      } else {
+        wrapper.style.maxHeight = answer.scrollHeight + 'px';
+        item.classList.remove('collapsed');
+        item.classList.add('expanded');
+        icon.textContent = '−';
+        question.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    question.addEventListener('click', toggle);
+    question.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
+}
+
+/**
+ * Scroll-triggered animations
+ */
+function initScrollAnimations() {
+  if (prefersReducedMotion) return;
+
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe only smaller elements for fade-in effect (NOT large content containers like .section)
+  const animatedElements = document.querySelectorAll('.service-card, .testimonial-card, .doctor-card, .feature-item, .benefit-item');
+  
+  animatedElements.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+
+  // Failsafe: force visibility after 500ms to prevent blank pages if observer doesn't fire
+  setTimeout(() => {
+    animatedElements.forEach(el => {
+      if (!el.classList.contains('animate-in')) {
+        el.classList.add('animate-in');
+      }
+    });
+  }, 500);
+
+  // Add animation class styles dynamically
+  const style = document.createElement('style');
+  style.textContent = `
+    .animate-in {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+/**
+ * Animated stat counters
+ */
+function initStatCounters() {
+  if (prefersReducedMotion) return;
+
+  const statsRow = document.querySelector('.stats-row');
+  if (!statsRow) return;
+
+  const stats = statsRow.querySelectorAll('.stat strong');
+  let hasAnimated = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasAnimated) {
+        hasAnimated = true;
+        stats.forEach(stat => {
+          const text = stat.textContent;
+          const match = text.match(/(\d+)/);
+          if (match) {
+            const target = parseInt(match[1]);
+            animateCounter(stat, 0, target, 2000);
+          }
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+
+  observer.observe(statsRow);
+}
+
+function animateCounter(element, start, end, duration) {
+  const range = end - start;
+  const increment = range / (duration / 16);
+  let current = start;
+  const suffix = element.textContent.replace(/\d+/g, '').trim();
+
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= end) {
+      current = end;
+      clearInterval(timer);
+    }
+    element.textContent = Math.floor(current) + suffix;
+  }, 16);
+}
+
+/**
+ * Sticky mobile CTA
+ */
+function initStickyCTA() {
+  if (window.innerWidth > 768) return; // Desktop only shows regular nav CTA
+
+  // Determine correct path to contact.html based on current location
+  const path = window.location.pathname;
+  const isInSubfolder = path.includes('/services/') || path.includes('/areas/') || path.includes('/doctors/');
+  const contactHref = isInSubfolder ? '../contact.html' : 'contact.html';
+
+  const stickyCTA = document.createElement('div');
+  stickyCTA.className = 'sticky-mobile-cta';
+  stickyCTA.innerHTML = `
+    <a href="${contactHref}" class="btn btn-primary">📅 Book Appointment</a>
+  `;
+
+  document.body.appendChild(stickyCTA);
+
+  // Get WhatsApp button to adjust its position
+  const whatsappFloat = document.querySelector('.whatsapp-float');
+
+  // Show when scrolled past hero
+  let isVisible = false;
+  window.addEventListener('scroll', () => {
+    const shouldShow = window.scrollY > 400;
+    
+    if (shouldShow && !isVisible) {
+      stickyCTA.classList.add('visible');
+      if (whatsappFloat) {
+        whatsappFloat.style.bottom = '80px';
+      }
+      isVisible = true;
+    } else if (!shouldShow && isVisible) {
+      stickyCTA.classList.remove('visible');
+      if (whatsappFloat) {
+        whatsappFloat.style.bottom = window.innerWidth <= 768 ? '20px' : '24px';
+      }
+      isVisible = false;
+    }
+  });
+}
+
+/**
+ * Smooth scroll for anchor links
+ */
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({
+          behavior: prefersReducedMotion ? 'auto' : 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+}
+
+/**
+ * Lazy load images
+ */
+function initLazyLoading() {
+  if ('loading' in HTMLImageElement.prototype) {
+    // Native lazy loading supported
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+      img.src = img.src; // Trigger loading
+    });
+  } else {
+    // Fallback for older browsers
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src || img.src;
+          img.classList.remove('lazy');
+          observer.unobserve(img);
+        }
+      });
+    });
+
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+      imageObserver.observe(img);
+    });
+  }
+}
+
+/**
+ * Initialize all features when DOM is ready
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  initWhatsAppWidget();
+  initMobileMenu();
+  initFormHandling();
+  initHeroSlider();
+  initTestimonialRotation();
+  initFAQAccordion();
+  initScrollAnimations();
+  initStatCounters();
+  initStickyCTA();
+  initSmoothScroll();
+  initLazyLoading();
 });
+
+// Export for testing if needed
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    initWhatsAppWidget,
+    initMobileMenu,
+    initFormHandling
+  };
+}
