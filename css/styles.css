@@ -1141,6 +1141,14 @@ a:hover { color: var(--red); }
   border: 2px dashed #d0d0d8;
 }
 
+.service-detail-image {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  margin-bottom: 32px;
+}
+
 .placeholder-text {
   font-size: 1.1rem;
   color: var(--gray);
@@ -1355,7 +1363,8 @@ a:hover { color: var(--red); }
     position: static;
   }
 
-  .service-image-placeholder {
+  .service-image-placeholder,
+  .service-detail-image {
     height: 240px;
   }
 
